@@ -12,15 +12,25 @@ interface ProjectListProps {
 
 // Netlify's static preview has no Express API; keep the initial screen useful
 // while preserving the real API response whenever the backend is available.
-const PREVIEW_PROJECT: Project = {
-  id: "preview-project",
-  name: "骨科临床科研数据集匿名化项目（预览）",
-  description: "用于产品预览的示例项目，展示医疗数据去标识化、方案管理与合规评估流程。",
-  creator: "预览用户",
-  createdAt: "2026-09-18 10:00",
-  updatedAt: "2026-09-18 10:00",
-  expectedK: 5,
-};
+const PREVIEW_PROJECTS: Project[] = [
+  {
+    id: "p1",
+    name: "复旦大学附属第一医院骨科临床科研数据集匿名化项目",
+    description: "针对骨科近五年内患者的出院随访病历、放射科影像数据进行脱敏与匿名化处理，确保满足《数据安全法》及学术合作合规要求。",
+    creator: "张国栋",
+    createdAt: "2026-06-18 10:24",
+    updatedAt: "2026-07-20 01:15",
+    expectedK: 5,
+  },
+  {
+    id: "p2",
+    name: "华山医院心内科AI辅助诊断模型训练集脱敏项目",
+    description: "对1.5万例心电图检查元数据与结构化病历进行k-匿名与l-多样性保护，生成可用于第三方AI算法训练的高质量合规数据集。",
+    creator: "李瑞",
+    createdAt: "2026-07-02 14:15",
+    expectedK: 10,
+  },
+];
 
 export default function ProjectList({ onSelectAction, projectUploadStates = {} }: ProjectListProps) {
   const [projects, setProjects] = useState<Project[]>([]);
@@ -44,10 +54,12 @@ export default function ProjectList({ onSelectAction, projectUploadStates = {} }
       if (response.ok) {
         const data = await response.json();
         setProjects(data);
+      } else {
+        setProjects(PREVIEW_PROJECTS);
       }
     } catch (err) {
       console.error("Failed to load projects:", err);
-      setProjects([PREVIEW_PROJECT]);
+      setProjects(PREVIEW_PROJECTS);
     } finally {
       setIsLoading(false);
     }
