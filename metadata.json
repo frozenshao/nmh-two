@@ -1,0 +1,8 @@
+{
+  "name": "Remix 医疗健康数据智能匿名化平台20260805",
+  "description": "专业级医疗去标识化与隐私合规管理平台。支持项目管理、合规基线评测、CSV/DICOM双格式核心算法仿真、重标识风险度量，以及基于Gemini的大型去标识化方案文档自动装配生成与下载。",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
