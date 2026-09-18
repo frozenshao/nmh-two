@@ -221,7 +221,9 @@ export default function ProjectList({ onSelectAction, projectUploadStates = {} }
       ) : filteredProjects.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6" id="project_cards_grid">
            {filteredProjects.map((project, index) => {
-             const isSchemeCompleted = !!(project.schemeDocText || project.schemeData) && !project.isRegeneratingPending;
+             // The bundled p1 project has its full scheme in the original server
+             // seed data; the static fallback keeps only card metadata.
+             const isSchemeCompleted = (!!(project.schemeDocText || project.schemeData) || project.id === 'p1') && !project.isRegeneratingPending;
              const isUploadCompleted = !!(projectUploadStates[project.id]?.isCompleted || (project.id === 'p1' && !project.isRegeneratingPending));
              const isConfigCompleted = !!(projectUploadStates[project.id]?.isConfigCompleted || (project.id === 'p1' && !project.isRegeneratingPending));
              const isTaskClickable = isUploadCompleted && isConfigCompleted;
